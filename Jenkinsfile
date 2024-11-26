@@ -13,17 +13,24 @@ pipeline {
     }
      stages {
          stage('GIT_cloning') {
+            steps { 
             git url : 'https://github.com/muthyalasaikiran/spring-petclinic.git',
                 branch : 'main'
      }
+         }
+
         stage('build and package ') {
+            steps { 
             sh script : 'mvn package'
      }
+        }
 
         stage('reportingg ') {
+            steps { 
             archiveArtifacts artifacts : '**/target/spring-petclinic-*.jar'
             junit testResults :  '**/target/surefire-reports/TEST-*.xml'
      }
+        }
     
 }
 

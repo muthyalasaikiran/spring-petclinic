@@ -10,7 +10,7 @@ pipeline {
         jdk 'JDK_17'
     }  
     stages {
-        stage ('vcs') {
+        stage ('vcs git ') {
             steps {
 
                 git url: 'https://github.com/muthyalasaikiran/spring-petclinic.git' ,

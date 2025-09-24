@@ -21,6 +21,13 @@ pipeline {
             steps {
                 sh script: 'mvn package'
             }
+            
+        }
+        stage ('reporting and downloads') {
+            steps {
+                archiveArtifacts artifacts: '**/target/spring-petclinic-*.jar'
+                junit testResults: '**/target/surefire-reports/TEST-*.xml'
+            }
         }
     }
     }

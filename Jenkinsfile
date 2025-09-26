@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'NODE1_172.31.30.132' }
+    agent any
     options {
         timeout(time: 30, unit: 'MINUTES') 
     }

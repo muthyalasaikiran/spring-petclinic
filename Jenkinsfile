@@ -1,49 +1,25 @@
 pipeline {
     agent any
-    options {
-        timeout(time: 30, unit: 'MINUTES') 
-    }
+    parameters {
+         choice(name: 'CHOICES', choices: ['mvn package', 'mvn test', 'mvn validate'], description: 'this is options') 
+         }
     triggers { 
         pollSCM('* * * * *')
-    }  
-    tools {
-        jdk 'JDK_17'
-    }  
+    }
     stages {
-        stage ('vcs git ') {
+        stage('build') {
             steps {
-
-                git url: 'https://github.com/muthyalasaikiran/spring-petclinic.git' ,
+                git url:'https://github.com/muthyalasaikiran/spring-petclinic.git',
                     branch: 'main'
             }
         }
-        stage ('build and package') {
-            steps {
-                sh script: 'mvn package'
-            }
+    }
+    stage('build') {
+            steps {  
+                echo "Choice: ${params.CHOICES}" 
             
 
-        }
-        
-        stage ('reporting and downloads') {
-            steps {
-                archiveArtifacts artifacts: '**/target/spring-petclinic-*.jar'
-                junit testResults: '**/target/surefire-reports/TEST-*.xml'
             }
+    }
 
-        }
-    }
-    post {
-        success {
-            mail subject: 'your project is successfull',
-                 body:    'your project is  effective',
-                 to: 'genesys@test.com'
-        }
-        failure{
-            mail subject: 'your project is fail',
-                 body:    'your project is  defective',
-                 to: 'genesys@test.com'
-        }
-    }
-    }
-    
+}

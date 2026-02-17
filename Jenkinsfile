@@ -13,13 +13,14 @@ pipeline {
                     branch: 'main'
             }
         }
-    }
-    stage('build') {
+        stage('build') {
             steps {  
-                echo "Choice: ${params.CHOICES}" 
+                echo "Choice: ${params.CHOICE}" 
             
 
             }
+    }
+    
     }
 
 }

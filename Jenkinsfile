@@ -16,6 +16,7 @@ pipeline {
         stage('build') {
             steps {  
                 echo "Choice: ${params.CHOICE}" 
+                sh 'touch hello'
             
 
             }

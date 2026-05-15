@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options { 
+        timeout(time: 1, unit: 'MINUTES')
+         }
     parameters { choice(name: 'CHOICES', choices: ['mvn test', 'mvn clean', 'mvn validate', 'mvn package'], description: 'this is build parameter') }
     tools {
         maven 'MVN_3.9.12'

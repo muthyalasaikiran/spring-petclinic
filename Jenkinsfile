@@ -1,6 +1,7 @@
 pipeline {
     agent any 
     triggers { pollSCM('* * * * *') }
+    parameters { choice(name: 'CHOICES', choices: ['mvn package', 'mvn validate', 'mvn clean','mvn test'], description: '') }
     stages {
         stage('git clone'){
             steps {

@@ -3,7 +3,7 @@ pipeline {
     triggers { pollSCM('* * * * *') }
     tools {
          maven 'MVN_ 3.9.12',
-         jdk    'JDK_17'
+         jdk    '/usr/lib/jvm/java-17-openjdk-amd64'
     }
     parameters { choice(name: 'CHOICES', choices: ['mvn package', 'mvn validate', 'mvn clean','mvn test'], description: '') }
     stages {

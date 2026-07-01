@@ -2,7 +2,8 @@ pipeline {
     agent any 
     triggers { pollSCM('* * * * *') }
     tools {
-         maven 'MVN_ 3.9.12', jdk 'JDK_17'
+         jdk 'JDK_17'
+         maven 'MVN_ 3.9.12'
     }
     parameters { choice(name: 'CHOICES', choices: ['mvn package', 'mvn validate', 'mvn clean','mvn test'], description: '') }
     stages {

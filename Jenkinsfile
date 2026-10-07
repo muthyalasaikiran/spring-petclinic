@@ -1,6 +1,6 @@
 pipeline {
     agent { label 'SPC_NODE1' }
-    triggers { pollSCM('H */4 * * 1-5') }
+    triggers { pollSCM('* * * * *') }
     parameters { choice(name: 'CHOICES', choices: ['mvn clean', 'mvn package', 'mvn validate'], description: '') }
     options {
         timeout(time: 1, unit: 'HOURS') 

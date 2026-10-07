@@ -1,22 +1,27 @@
 pipeline {
-    agent any 
-    triggers { pollSCM('* * * * *') }
-    tools {
-         jdk 'JDK_17'
-         maven 'MVN_ 3.9.12'
+    agent { label 'SPC_NODE1' }
+    triggers { pollSCM('H */4 * * 1-5') }
+    parameters { choice(name: 'CHOICES', choices: ['mvn clean', 'mvn package', 'mvn validate'], description: '') }
+    options {
+        timeout(time: 1, unit: 'HOURS') 
     }
-    parameters { choice(name: 'CHOICES', choices: ['mvn package', 'mvn validate', 'mvn clean','mvn test'], description: '') }
-    stages {
-        stage('git clone'){
+    tools {
+        jdk 'JDK_17'
+        maven 'mvn_3.9.12'
+    }
+    stages{
+        stage('git clone') {
             steps {
-                git branch:'main',url:'https://github.com/muthyalasaikiran/spring-petclinic.git'
+                git branch: 'main', url: 'https://github.com/muthyalasaikiran/spring-petclinic.git'
             }
+            
         }
-        stage('validate'){
-            steps{
+
+        stage('validate the codde') {
+            steps {
                 echo "Choice: ${params.CHOICES}"
             }
         }
-
     }
+  
 }
